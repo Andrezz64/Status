@@ -1,12 +1,24 @@
+import { useQuery } from "@apollo/client"
 import { Header } from "./Header"
 import { Status } from "./Status"
-
-
-
+import SERVICE_STATUS from "./querys/index.js"
+import { useState, useEffect } from 'react'
 function App() {
 
+    
 
-  return (
+  
+  const { loading, error, data } = useQuery(SERVICE_STATUS);
+    
+    if (loading) {
+      return <p>Loading...</p>;
+    }
+  
+    if (error) {
+      return <p>an error occurred...</p>;
+    }
+
+  return(
   <div>
     <Header/>
     <div className="flex items-center justify-center">
@@ -15,11 +27,14 @@ function App() {
             <header className="text-white mt-4 mb-5 border-b-2 border-zinc-500">Status de Serviço</header>
             
             <div className="">
-            <Status status={1} service="Ramal" />
-            <Status status={1} service="Go-Global"/>
-            <Status status={2} service="Firewall"/>
-            <Status status={4} service="Alterdata Cloud"/>
-            <Status status={3} service="VPN"/>
+              
+              {
+                data.alterdata_Services.map(data =>{
+                  return(
+                    <Status service={data.serviceName} status={data.state} key={data.id}/>
+                  )
+                })
+              }
             
             </div>
             

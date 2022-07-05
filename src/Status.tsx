@@ -1,14 +1,17 @@
+import { useState, useEffect } from "react"
 import { CheckCircle, XCircle, WarningCircle, ClockClockwise } from "phosphor-react"
 interface propsType {
-    status: Number,
+    status: string,
     service: string,
+    data: object,
 
     
 }
 
 
 export function Status (props: propsType) {
-    if(props.status == 1){
+    
+    if(props.status === "online"){
         
         const color = 'text-green-600'
         const text = "Online"
@@ -20,7 +23,7 @@ export function Status (props: propsType) {
             
         )
     }
-    else if (props.status == 2){
+    else if (props.status === "offline"){
         const color = 'text-red-600'
         const text = "Offline"
         return(
@@ -29,7 +32,7 @@ export function Status (props: propsType) {
             </div>
         )
     }
-    else if (props.status == 3){
+    else if (props.status === "verificacao"){
         const color = 'text-orange-600'
         const text = "Em verificação"
         return(
@@ -38,7 +41,7 @@ export function Status (props: propsType) {
             </div>
         )
     }
-    else if (props.status == 4){
+    else if (props.status === "manutencao"){
         const color = 'text-sky-500'
         const text = "Em manutenção"
         return(
