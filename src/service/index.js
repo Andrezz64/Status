@@ -1,9 +1,9 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client"
 
-
+const apiSecret = process.env.MY_API_SECRET
 const client = new ApolloClient(
   {
-    uri: "https://api-sa-east-1.graphcms.com/v2/cl55m19fp3ifd01upb8hgdqv3/master",
+    uri: apiSecret,
     cache: new InMemoryCache(),
   }
 )
